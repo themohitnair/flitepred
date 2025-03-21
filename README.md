@@ -1,6 +1,6 @@
 # flitepred
 
-An ML project that predicts flight delays based on data in the BTS (Bureau of Transportation Statistics)
+An ML project that aims to create a model that predicts flight delays based on data from Indian Airline Websites in the years 2019 and 2020.
 
 ## Dataset
 
