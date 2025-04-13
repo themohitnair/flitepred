@@ -3,7 +3,7 @@ import pandas as pd
 
 raw_data_path = "dataset/raw"
 processed_data_path = "dataset/processed"
-output_file = "dataset/processed/jfk_2024.csv"
+output_file = "dataset/processed/jfk_ontime_2024.csv"
 
 os.makedirs(processed_data_path, exist_ok=True)
 
