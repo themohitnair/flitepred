@@ -24,7 +24,7 @@ Sure! Here's the **Membership** data formatted into neat tables:
 
 ### Top 5 Airline Carriers
 
-| Rank | OP_UNIQUE_CARRIER | Flights |
+| Rank | OP_UNIQUE_CARRIER  | Flights |
 |------|--------------------|---------|
 | 1    | B6 (JetBlue)       | 35,345  |
 | 2    | DL (Delta)         | 30,077  |
@@ -33,3 +33,19 @@ Sure! Here's the **Membership** data formatted into neat tables:
 | 5    | AA (American)      | 14,297  |
 
 I have decided to filter the cleaned data first by the Top 5 Destination Airports, and then the Top 3 Airline Carriers, in interest of balanced data and a larger number of data points.
+
+## Script Sequence
+
+`append.py` -> `weather.py` -> `join.py` -> `clean.py` -> `filter.py` -> `rename.py`
+
+`append.py`: To join all the monthly on-time performance CSVs and fuse it into a single one, while filtering by Origin Airport 12478 (JFK, NYC).
+
+`weather.py`: Fetches hourly historical weather data from open-meteo for the coordinates of JFK, NYC.
+
+`join.py`: Combines the two datasets using the hour part of departure time.
+
+`clean.py`: Cleans the data to remove certain fields and add other ones (such as departure hour).
+
+`filter.py`: To filter the cleaned data first by the Top 5 Destination Airports, and then the Top 3 Airline Carriers, in interest of balanced data and a larger number of data points.
+
+`rename.py`: To rename the fields in the dataset in the interest of aesthetics and consistency.
