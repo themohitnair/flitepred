@@ -63,3 +63,23 @@ I have decided to filter the cleaned data first by the Top 5 Destination Airport
 ![Departure Delay Distribution](model/plots/departure_delay_distribution.png)
 
 ![Flight Count by Destination](model/plots/flight_count_by_destination.png)
+
+## Membership after filtering
+
+### ✈️ Flights per Airline Carrier
+
+| Airline Carrier | Number of Flights |
+|-----------------|-------------------|
+| B6              | 10,879            |
+| DL              | 9,455             |
+| AA              | 7,506             |
+
+### 🛬 Flights per Destination Airport
+
+| Destination Airport ID | Number of Flights |
+|------------------------|-------------------|
+| 12892                  | 9,859             |
+| 13303                  | 5,352             |
+| 14771                  | 5,216             |
+| 13204                  | 4,412             |
+| 10721                  | 3,001             |
