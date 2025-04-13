@@ -49,3 +49,17 @@ I have decided to filter the cleaned data first by the Top 5 Destination Airport
 `filter.py`: To filter the cleaned data first by the Top 5 Destination Airports, and then the Top 3 Airline Carriers, in interest of balanced data and a larger number of data points.
 
 `rename.py`: To rename the fields in the dataset in the interest of aesthetics and consistency.
+
+## Visualizations
+
+![Average Delay by Airline](model/plots/average_delay_by_airline.png)
+
+![Delay vs Temperature](model/plots/delay_vs_temperature.png)
+
+![Delays by Weather Code](model/plots/delays_by_weather_code.png)
+
+![Departure Delay by Hour](model/plots/departure_delay_by_hour.png)
+
+![Departure Delay Distribution](model/plots/departure_delay_distribution.png)
+
+![Flight Count by Destination](model/plots/flight_count_by_destination.png)
