@@ -36,7 +36,7 @@ I have decided to filter the cleaned data first by the Top 5 Destination Airport
 
 ## Script Sequence
 
-`append.py` -> `weather.py` -> `join.py` -> `clean.py` -> `filter.py` -> `rename.py`
+`append.py` -> `weather.py` -> `join.py` -> `clean.py` -> `filter.py` -> `rename.py` -> `encode.py`
 
 `append.py`: To join all the monthly on-time performance CSVs and fuse it into a single one, while filtering by Origin Airport 12478 (JFK, NYC).
 
@@ -50,9 +50,19 @@ I have decided to filter the cleaned data first by the Top 5 Destination Airport
 
 `rename.py`: To rename the fields in the dataset in the interest of aesthetics and consistency.
 
+`encode.py`: To process and encode a flight dataset by applying target encoding, cyclical encoding, one-hot encoding for weather, scaling numerical features, and saving the cleaned data to a CSV file.
+
 ## Visualizations
 
 ![Average Delay by Airline](model/plots/average_delay_by_airline.png)
+
+![Average Delay by Day of Week](model/plots/average_delay_by_day_of_week.png)
+
+![Average Delay by Month](model/plots/average_delay_by_month.png)
+
+![Average Delay by Weather Condition](model/plots/average_delay_by_weather_condition.png)
+
+![Delay vs Distance](model/plots/delay_vs_distance.png)
 
 ![Delay vs Temperature](model/plots/delay_vs_temperature.png)
 
@@ -63,6 +73,8 @@ I have decided to filter the cleaned data first by the Top 5 Destination Airport
 ![Departure Delay Distribution](model/plots/departure_delay_distribution.png)
 
 ![Flight Count by Destination](model/plots/flight_count_by_destination.png)
+
+![Flight Count by Weather Condition](model/plots/flight_count_by_weather_condition.png)
 
 ## Membership after filtering
 
@@ -83,3 +95,16 @@ I have decided to filter the cleaned data first by the Top 5 Destination Airport
 | 14771                  | 5,216             |
 | 13204                  | 4,412             |
 | 10721                  | 3,001             |
+
+## Model Performance
+
+| Model                  | RMSE      | MAE        | R²            |
+|------------------------|-----------|------------|---------------|
+| Random Forest          | 18.09     | 7.33       | 0.89          |
+| XGBoost                | 27.17     | 13.91      | 0.75          |
+| CatBoost               | 35.49     | 16.66      | 0.57          |
+| LightGBM               | 40.33     | 17.42      | 0.44          |
+| Gradient Boosting      | 46.31     | 20.17      | 0.26          |
+| Linear Regression      | 52.31     | 24.59      | 0.06          |
+| Support Vector Regression | 54.78  | 18.52      | -0.03         |
+| AdaBoost               | 101.76    | 76.59      | -2.55         |
