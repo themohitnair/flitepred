@@ -10,8 +10,6 @@ The dataset used for this project has been acquired from from the repository can
 
 Here is the membership information according to Destination Airports, and Airline Carriers in the data concerning flights from JFK, New York City.
 
-Sure! Here's the **Membership** data formatted into neat tables:
-
 ### Top 5 Destination Airport IDs
 
 | Rank | DEST_AIRPORT_ID       | Flights |
