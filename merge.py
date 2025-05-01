@@ -3,7 +3,6 @@ import os
 
 
 def load_data():
-    """Load the weather and flights datasets"""
     weather_path = "dataset/processed_data/weather_cleaned.csv"
     flights_path = "dataset/processed_data/filtered_flights.csv"
 
@@ -46,12 +45,10 @@ def process_weather_data(weather_df):
     required_cols = ["YEAR", "MONTH", "DAY_OF_MONTH", "HOUR", "MINUTE"]
     weather_df = weather_df.dropna(subset=required_cols)
 
-    # Ensure all required columns are the right type
     weather_df["YEAR"] = weather_df["YEAR"].astype(int)
     weather_df["MONTH"] = weather_df["MONTH"].astype(int)
     weather_df["DAY_OF_MONTH"] = weather_df["DAY_OF_MONTH"].astype(int)
 
-    # Create datetime objects for easier comparison
     try:
         weather_df["DATETIME"] = pd.to_datetime(
             {
@@ -72,8 +69,6 @@ def process_weather_data(weather_df):
 
 
 def process_flights_data(flights_df):
-    """Process flights data to create datetime objects for matching"""
-    # Handle missing values by dropping rows with NaN in critical columns
     required_cols = ["YEAR", "MONTH", "DAY_OF_MONTH", "CRS_DEP_TIME"]
     flights_df = flights_df.dropna(subset=required_cols)
 
@@ -82,18 +77,15 @@ def process_flights_data(flights_df):
     flights_df["MONTH"] = flights_df["MONTH"].astype(int)
     flights_df["DAY_OF_MONTH"] = flights_df["DAY_OF_MONTH"].astype(int)
 
-    # Check if DEP_TIME is already a datetime
     if "DEP_TIME" in flights_df.columns and pd.api.types.is_datetime64_dtype(
         flights_df["DEP_TIME"]
     ):
         flights_df["DATETIME"] = flights_df["DEP_TIME"]
     else:
-        # Convert CRS_DEP_TIME to proper time format (HHMM)
         flights_df["CRS_DEP_TIME"] = flights_df["CRS_DEP_TIME"].astype(str).str.zfill(4)
         flights_df["HOUR"] = flights_df["CRS_DEP_TIME"].str[:2].astype(int)
         flights_df["MINUTE"] = flights_df["CRS_DEP_TIME"].str[2:].astype(int)
 
-        # Create datetime objects using dictionary approach
         try:
             flights_df["DATETIME"] = pd.to_datetime(
                 {
@@ -116,19 +108,14 @@ def process_flights_data(flights_df):
 
 
 def find_closest_weather_data(flights_df, weather_df):
-    """Find the closest weather data point for each flight"""
-    # Create a new dataframe to store the merged results
     merged_df = flights_df.copy()
 
-    # Create columns to store the closest weather data indices and time differences
     merged_df["closest_weather_idx"] = None
     merged_df["time_diff_minutes"] = None
 
-    # For each flight, find the closest weather data point
     for idx, flight in flights_df.iterrows():
         flight_time = flight["DATETIME"]
 
-        # Filter weather data for the same day to reduce computation
         same_day_weather = weather_df[
             (weather_df["YEAR"] == flight["YEAR"])
             & (weather_df["MONTH"] == flight["MONTH"])
@@ -138,7 +125,6 @@ def find_closest_weather_data(flights_df, weather_df):
         if len(same_day_weather) == 0:
             continue
 
-        # Calculate time differences in minutes
         time_diffs = abs(
             (same_day_weather["DATETIME"] - flight_time).dt.total_seconds() / 60
         )
@@ -153,7 +139,6 @@ def find_closest_weather_data(flights_df, weather_df):
 
 
 def merge_datasets(merged_df, weather_df):
-    """Merge flight data with the closest weather data"""
     result_df = merged_df.copy()
     if "closest_weather_idx" in result_df.columns:
         weather_columns = [
@@ -190,7 +175,6 @@ def merge_datasets(merged_df, weather_df):
 
 
 def main():
-    """Main function to run the entire process"""
     try:
         print("Loading data...")
         weather_df, flights_df = load_data()
