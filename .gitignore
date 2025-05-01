@@ -1,3 +1,6 @@
 .venv
 __pycache__
 dataset
+catboost_info
+model/model
+processed_data/
