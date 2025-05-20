@@ -50,3 +50,16 @@ def analyze_flight_statistics(
     print("\nTop 5 Routes (Carrier + Destination):\n", route_counts)
 
     return top_5_destinations, top_5_carriers, route_counts
+
+
+def check_class_imbalance_from_csv(
+    csv_path="dataset/processed/jfk_optimized.csv", target_col="label"
+):
+    df = pd.read_csv(csv_path)
+    counts = df[target_col].value_counts()
+    percentages = df[target_col].value_counts(normalize=True) * 100
+    print(f"Class distribution for '{target_col}':\n")
+    print("Counts:")
+    print(counts)
+    print("\nPercentages:")
+    print(percentages)
