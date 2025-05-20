@@ -7,7 +7,7 @@ In aviation, a flight is officially considered “on time” if it arrives less 
 ## About the Data
 
 - The dataset used for this project has been acquired from from the following source: [The Bureau of Transportation Statistics Website](https://transtats.bts.gov/DL_SelectFields.aspx?gnoyr_VQ=FGJ&QO_fu146_anzr=b0-gvzr)
-- Data from the years 2014 to 2024 (barring 2020 and 2019, owing to the addition of noise from the COVID-19 pandemic) was gathered, and it was analyzed for its two main categories: Destination and Airline Carrier.
+- Data from the years 2014 to 2024 (barring 2020 and 2021, owing to the addition of noise from the COVID-19 pandemic) was gathered, and it was analyzed for its two main categories: Destination and Airline Carrier. A total of 1044653 records were found, encompassing on-time performance data for all airports and airline carriers in the US from the BTS.
 
 ### ✈️ Top 5 Destinations
 
@@ -19,8 +19,6 @@ In aviation, a flight is officially considered “on time” if it arrives less 
 | 13204          | 45,952       |
 | 13303          | 40,077       |
 
----
-
 ### 🛩️ Top 5 Airline Carriers
 
 | Carrier | Flight Count |
@@ -30,8 +28,6 @@ In aviation, a flight is officially considered “on time” if it arrives less 
 | AA      | 145,331      |
 | 9E      | 103,118      |
 | YX      | 60,349       |
-
----
 
 ### 🔁 Top 5 Routes (Carrier + Destination)
 
@@ -44,5 +40,5 @@ In aviation, a flight is officially considered “on time” if it arrives less 
 | B6      | 11697          | 23,984       |
 
 - AA (American Airlines), B6 (JetBlue Airlines), and DL (Delta Airlines) are found to be the top 3 carriers at the John F. Kennedy International Airport, New York.
-- 12892 (Los Angeles International Airport, Los Angeles), 14771 (San Francisco International, San Francisco), and (Logan International Airport, Boston) are found to be the top 3 destinations from the John F. Kennedy International Airport, New York.
+- 12892 (Los Angeles International Airport, Los Angeles), 14771 (San Francisco International, San Francisco), and 10721 (Logan International Airport, Boston) are found to be the top 3 destinations from the John F. Kennedy International Airport, New York.
 - The top 3 routes (routes being a unique combination of an Airline and a Destination) are all found to be to Los Angeles International Airport, Los Angeles, through the Top 3 Airline Carriers (Delta, JetBlue and American Airlines). The class imbalance among these is minimal, which is why it was decided to filter the data to the Top Destination (Los Angeles), and the Top 3 Airline Carriers.

@@ -5,7 +5,7 @@ import pandas as pd
 
 
 def filter_selected_carriers_and_destination(
-    data_file: Union[str, Path] = "dataset/jfk_combined.csv",
+    data_file: Union[str, Path] = "dataset/processed/jfk_combined.csv",
     carriers: list[str] = ["AA", "B6", "DL"],
     destination: int = 12892,
     output_file: Union[str, Path] = "dataset/processed/airline_filtered.csv",

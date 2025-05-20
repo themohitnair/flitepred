@@ -27,13 +27,22 @@ def load_and_filter_csv(file_path: Path, origin_id: int = 12478) -> pd.DataFrame
 def amalgamate_flight_data(
     raw_data_path: Union[str, Path], output_file: Union[str, Path]
 ):
-    """Combines all filtered CSVs into a single file."""
-    csv_files = collect_csv_files(raw_data_path, exclude=["jfk_weather_2014_24.csv"])
+    """Combines all filtered CSVs into a single file, saves inside dataset/processed."""
+    raw_path = Path(raw_data_path)
+    output_path = Path(output_file)
+
+    # Ensure output directory exists (dataset/processed)
+    output_dir = output_path.parent
+    if not output_dir.exists():
+        print(f"Creating directory {output_dir}")
+        output_dir.mkdir(parents=True, exist_ok=True)
+
+    csv_files = collect_csv_files(raw_path, exclude=["jfk_weather_2014_24.csv"])
     print(f"Found {len(csv_files)} CSV files.")
 
     all_dataframes = [load_and_filter_csv(file) for file in csv_files]
     combined_df = pd.concat(all_dataframes, ignore_index=True)
     print(f"Total records after filtering: {len(combined_df)}")
 
-    combined_df.to_csv(output_file, index=False)
-    print(f"Combined data saved to {output_file}")
+    combined_df.to_csv(output_path, index=False)
+    print(f"Combined data saved to {output_path}")

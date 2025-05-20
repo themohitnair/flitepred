@@ -5,7 +5,7 @@ import pandas as pd
 
 
 def analyze_flight_statistics(
-    data_file: Union[str, Path] = "dataset/jfk_combined.csv",
+    data_file: Union[str, Path] = "dataset/processed/jfk_combined.csv",
 ) -> tuple[pd.Series, pd.Series, pd.DataFrame]:
     """
     Analyzes flight data and returns the top 5 destinations, airline carriers,
