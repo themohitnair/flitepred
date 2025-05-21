@@ -68,17 +68,6 @@ def preprocess_flight_data(
         right=False,
     )
 
-    # --- Day Period ---
-    df["day_period"] = pd.cut(
-        df["day_of_month"],
-        bins=[0, 10, 20, 31],
-        labels=["early", "mid", "late"],
-        right=False,
-    )
-
-    # --- Season ---
-    df["season"] = df["month"].apply(get_season)
-
     # --- Holiday / Weekend ---
     df["is_holiday_or_weekend"] = df.apply(is_holiday_or_weekend, axis=1)
 
@@ -88,7 +77,15 @@ def preprocess_flight_data(
     )
 
     # --- Drop Raw Time / Delay ---
-    df = df.drop(columns=["scheduled_departure_time", "departure_delay", "year"])
+    df = df.drop(
+        columns=[
+            "scheduled_departure_time",
+            "departure_delay",
+            "year",
+            "day_of_month",
+            "dep_min",
+        ]
+    )
 
     # --- One-hot Encoding ---
     df = pd.get_dummies(
@@ -98,8 +95,6 @@ def preprocess_flight_data(
             "day_of_week",
             "carrier",
             "departure_bin",
-            "day_period",
-            "season",
         ],
     )
 
