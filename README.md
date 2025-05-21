@@ -57,11 +57,9 @@ In aviation, a flight is officially considered “on time” if it arrives less 
   - Raw minutes (dep_min)
   - Sinusoidal encoding (dep_sin, dep_cos) to capture cyclical nature of time
   - Categorical bins (departure_bin_night, departure_bin_morning, departure_bin_afternoon, departure_bin_evening)
-  - Additional day period categorization (day_period_early, day_period_mid, day_period_late)
 - **Day of Week**: One-hot encoded into 7 columns (day_of_week_1 through day_of_week_7)
 - **Day of Month**: Kept as raw numerical value
 - **Month**: One-hot encoded into 12 columns (month_1 through month_12)
-- **Season**: Derived from month and one-hot encoded (season_fall, season_spring, season_summer, season_winter)
 
 ### Categorical Feature Engineering
 
@@ -78,8 +76,6 @@ In aviation, a flight is officially considered “on time” if it arrives less 
 This preprocessing pipeline effectively transforms raw flight data into a feature set ready for classification, with appropriate handling of temporal features, categorical variables, and the creation of a meaningful target variable.
 
 ## Imbalance Analysis
-
-## Flight Delay Classification Dataset - Class Distribution
 
 | Class Label | Count      | Percentage  |
 | :---------- | :--------- | :---------- |
