@@ -78,7 +78,7 @@ Here's your data formatted as a neat markdown table:
 
 | Label       | Count | Percentage (%) |
 | ----------- | ----- | -------------- |
-| not_delayed | 59991 | 66.76          |
-| delayed     | 29864 | 33.24          |
+| Not Delayed | 59991 | 66.76          |
+| Delayed     | 29864 | 33.24          |
 
 This table shows the class distribution after setting the delay threshold to 0 minutes. The classes are more or less balanced, with approximately a 2:1 ratio between not_delayed and delayed flights.
