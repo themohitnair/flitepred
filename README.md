@@ -69,19 +69,16 @@ In aviation, a flight is officially considered “on time” if it arrives less 
 ### Target Variable Creation
 
 - **Delay Classification (label)**:
-  - "early": Negative delay (aircraft departed before scheduled time)
-  - "ontime": Positive delay less than 15 minutes
-  - "delayed": Positive delay of 15 minutes or more
+  - "not_delayed": Negative Delay i.e., Delay less than 0 minutes
+  - "delayed": Positive delay of 1 minute or more
 
 This preprocessing pipeline effectively transforms raw flight data into a feature set ready for classification, with appropriate handling of temporal features, categorical variables, and the creation of a meaningful target variable.
 
-## Imbalance Analysis
+Here's your data formatted as a neat markdown table:
 
-| Class Label | Count      | Percentage  |
-| :---------- | :--------- | :---------- |
-| Early       | 55,130     | 61.35%      |
-| On-time     | 19,619     | 21.83%      |
-| Delayed     | 15,106     | 16.81%      |
-| **Total**   | **89,855** | **100.00%** |
+| Label       | Count | Percentage (%) |
+| ----------- | ----- | -------------- |
+| not_delayed | 59991 | 66.76          |
+| delayed     | 29864 | 33.24          |
 
-_Note: The dataset shows a moderate imbalance with the "Early" class representing over 60% of all instances, while the "Delayed" class accounts for only about 17% of the data._
+This table shows the class distribution after setting the delay threshold to 0 minutes. The classes are more or less balanced, with approximately a 2:1 ratio between not_delayed and delayed flights.

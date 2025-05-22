@@ -16,13 +16,11 @@ def convert_time_to_minutes(t):
 
 
 def label_delay(x):
-    """Classify delay into early, ontime, delayed"""
-    if x < 0:
-        return "early"
-    elif x <= 15:
-        return "ontime"
-    else:
+    """Binary classification: delayed or not"""
+    if x > 0:
         return "delayed"
+    else:
+        return "not_delayed"
 
 
 def get_season(month):
@@ -81,7 +79,6 @@ def preprocess_flight_data(
         columns=[
             "scheduled_departure_time",
             "departure_delay",
-            "year",
             "day_of_month",
             "dep_min",
         ]
