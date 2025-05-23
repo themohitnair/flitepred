@@ -8,6 +8,7 @@ In aviation, a flight is officially considered “on time” if it arrives less 
 
 - The dataset used for this project has been acquired from from the following source: [The Bureau of Transportation Statistics Website](https://transtats.bts.gov/DL_SelectFields.aspx?gnoyr_VQ=FGJ&QO_fu146_anzr=b0-gvzr)
 - Data from the years 2014 to 2024 (barring 2020 and 2021, owing to the addition of noise from the COVID-19 pandemic) was gathered, and it was analyzed for its two main categories: Destination and Airline Carrier. A total of 1044653 records were found, encompassing on-time performance data for all airports and airline carriers in the US from the BTS.
+- After filtering to the routes AA, B6, and DL, a total of **89855** records were found.
 
 ### ✈️ Top 5 Destinations
 
