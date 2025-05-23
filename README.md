@@ -74,7 +74,7 @@ In aviation, a flight is officially considered “on time” if it arrives less 
 
 This preprocessing pipeline effectively transforms raw flight data into a feature set ready for classification, with appropriate handling of temporal features, categorical variables, and the creation of a meaningful target variable.
 
-Here's your data formatted as a neat markdown table:
+## Class Imbalance
 
 | Label       | Count | Percentage (%) |
 | ----------- | ----- | -------------- |
