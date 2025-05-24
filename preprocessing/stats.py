@@ -26,13 +26,10 @@ def analyze_flight_statistics(
     """
     df = pd.read_csv(data_file)
 
-    # Top 5 destination airports
     top_5_destinations = df["DEST_AIRPORT_ID"].value_counts().head(5)
 
-    # Top 5 airline carriers
     top_5_carriers = df["OP_UNIQUE_CARRIER"].value_counts().head(5)
 
-    # Top 5 most common airline + destination combinations
     route_counts = (
         df.groupby(["OP_UNIQUE_CARRIER", "DEST_AIRPORT_ID"])
         .size()
@@ -44,7 +41,6 @@ def analyze_flight_statistics(
         .head(10)
     )
 
-    # Print results
     print("Top 5 Destinations:\n", top_5_destinations)
     print("\nTop 5 Airline Carriers:\n", top_5_carriers)
     print("\nTop 5 Routes (Carrier + Destination):\n", route_counts)

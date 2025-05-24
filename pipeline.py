@@ -15,5 +15,8 @@ if __name__ == "__main__":
     analyze_flight_statistics()
     filter_selected_carriers_and_destination()
     prune_flight_data()
-    preprocess_flight_data()
+    preprocess_flight_data(
+        input_path="dataset/processed/airline_filtered_pruned.csv",
+        output_path="dataset/processed/jfk_optimized.csv",
+    )
     check_class_imbalance_from_csv()

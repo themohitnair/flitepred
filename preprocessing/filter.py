@@ -37,11 +37,9 @@ def filter_selected_carriers_and_destination(
         & (df["DEST_AIRPORT_ID"] == destination)
     ]
 
-    # Ensure output directory exists
     output_path = Path(output_file)
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    # Save filtered data
     filtered_df.to_csv(output_file, index=False)
 
     print(

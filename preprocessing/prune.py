@@ -17,7 +17,6 @@ def rename_columns(df: pd.DataFrame) -> pd.DataFrame:
     pd.DataFrame
         Dataframe with renamed columns and specified columns removed
     """
-    # Define a mapping for renaming columns to more human-readable names
     rename_map = {
         "YEAR": "year",
         "MONTH": "month",
@@ -31,10 +30,8 @@ def rename_columns(df: pd.DataFrame) -> pd.DataFrame:
         "CRS_ELAPSED_TIME": "scheduled_elapsed_time",
     }
 
-    # Rename columns
     df = df.rename(columns=rename_map)
 
-    # Remove origin and destination airport ID columns
     if "ORIGIN_AIRPORT_ID" in df.columns:
         df = df.drop(columns=["ORIGIN_AIRPORT_ID"])
     if "DEST_AIRPORT_ID" in df.columns:
@@ -58,31 +55,23 @@ def prune_flight_data(
         Path to save the pruned CSV file
     """
     try:
-        # Load the dataset
         df = pd.read_csv(input_path)
         print(f"Initial shape: {df.shape}")
 
-        # Filter out cancelled flights (CANCELLED = 0.0)
         df = df[df["CANCELLED"] == 0.0]
 
-        # Filter out diverted flights (DIVERTED = 0.0)
         df = df[df["DIVERTED"] == 0.0]
 
-        # Drop rows with any null values
         df = df.dropna()
 
-        # Remove cancelled and diverted columns
         df = df.drop(columns=["CANCELLED", "DIVERTED", "DISTANCE"])
 
-        # Rename columns to human-readable names and remove airport ID columns
         df = rename_columns(df)
 
         print(f"Final shape after filtering: {df.shape}")
 
-        # Create directory if it doesn't exist
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
-        # Save the filtered data
         df.to_csv(output_path, index=False)
         print(f"Filtered data saved to {output_path}")
     except FileNotFoundError:

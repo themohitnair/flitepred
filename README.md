@@ -44,34 +44,71 @@ In aviation, a flight is officially considered “on time” if it arrives less 
 - 12892 (Los Angeles International Airport, Los Angeles), 14771 (San Francisco International, San Francisco), and 10721 (Logan International Airport, Boston) are found to be the top 3 destinations from the John F. Kennedy International Airport, New York.
 - The top 3 routes (routes being a unique combination of an Airline and a Destination) are all found to be to Los Angeles International Airport, Los Angeles, through the Top 3 Airline Carriers (Delta, JetBlue and American Airlines). The class imbalance among these is minimal, which is why it was decided to filter the data to the Top Destination (Los Angeles), and the Top 3 Airline Carriers.
 
-## Feature Engineering - Remastered Description
+## Feature Engineering
 
-### Data Removal and Transformation
+### Key Preprocessing & Feature Engineering (Script Logic)
 
-- Features such as Origin Airport ID, Destination Airport ID, Distance, and Year were removed as they were either constants (for a single NY to LA route) or irrelevant.
-- CANCELLED and DIVERTED columns were also removed from the dataset.
-- CRS_ELAPSED_TIME was renamed to scheduled_elapsed_time.
+1. **Column Renaming & Consistency**
 
-### Temporal Feature Engineering
+   - Renamed columns to lowercase snake_case and logical names, e.g., `CRS_DEP_TIME` → `scheduled_departure_time`, `DEP_DELAY` → `departure_delay`, `OP_UNIQUE_CARRIER` → `carrier`.
 
-- **Departure Time**: Transformed into three representations:
-  - Raw minutes (dep_min)
-  - Sinusoidal encoding (dep_sin, dep_cos) to capture cyclical nature of time
-  - Categorical bins (departure_bin_night, departure_bin_morning, departure_bin_afternoon, departure_bin_evening)
-- **Day of Week**: One-hot encoded into 7 columns (day_of_week_1 through day_of_week_7)
-- **Day of Month**: Kept as raw numerical value
-- **Month**: One-hot encoded into 12 columns (month_1 through month_12)
+2. **Critical Data Filtering**
 
-### Categorical Feature Engineering
+   - Rows missing key flight info (`year`, `month`, `day_of_month`, `scheduled_departure_time`, `departure_delay`, `carrier`) were **dropped** like dead weight.
 
-- **Airline Carrier (OP_UNIQUE_CARRIER)**: One-hot encoded (carrier_AA, carrier_B6, carrier_DL)
-- **is_holiday_or_weekend**: Boolean feature indicating whether the flight occurred on either a US holiday or weekend
+3. **Labeling**
 
-### Target Variable Creation
+   - `label`: Binary label – flights with positive `departure_delay` as `"delayed"`, others `"not_delayed"`.
 
-- **Delay Classification (label)**:
-  - "not_delayed": Negative Delay i.e., Delay less than 0 minutes
-  - "delayed": Positive delay of 1 minute or more
+4. **Departure Time Features**
+
+   - `dep_min`: Departure time (`HHMM`) converted to **minutes since midnight**.
+   - `dep_sin`, `dep_cos`: **Cyclical encoding** of departure time (think circular clocks).
+
+5. **Departure Time Binning**
+
+   - `departure_bin`: Departure time put into 4 bins:
+
+     - `night` (0–359 min)
+     - `morning` (360–719)
+     - `afternoon` (720–1079)
+     - `evening` (1080–1439)
+
+6. **Day-of-Year Features**
+
+   - `day_of_year`: Day of year (1–365/366).
+   - `day_of_year_sin`, `day_of_year_cos`: Cyclical encoding of this day.
+
+7. **Season Tagging**
+
+   - `season`: Based on month (`spring`, `summer`, `fall`, `winter`).
+
+8. **Holiday & Weekend**
+
+   - `is_holiday_or_weekend`: **True** if flight on a **US holiday** or **weekend** (Saturday/Sunday).
+
+9. **Part of Month**
+
+   - `part_of_month_early`: True if day ≤ 10
+   - `part_of_month_mid`: True if 11 ≤ day ≤ 20
+   - `part_of_month_late`: True if day > 20
+
+10. **One-Hot Encoding**
+
+    - One-hot columns for:
+
+      - `month` (12)
+      - `day_of_week` (7)
+      - `carrier` (all unique carriers)
+      - `departure_bin` (4 bins)
+      - `season` (4 seasons)
+
+11. **Final Dataset Selection**
+
+    - Kept:
+
+      - **Direct features**: `scheduled_elapsed_time`, `label`, `dep_min`, `dep_sin`, `dep_cos`, `day_of_year_sin`, `day_of_year_cos`, `part_of_month_early`, `part_of_month_mid`, `part_of_month_late`, `is_holiday_or_weekend`
+      - **One-hot features** for `month`, `day_of_week`, `carrier`, `departure_bin`, `season`.
 
 This preprocessing pipeline effectively transforms raw flight data into a feature set ready for classification, with appropriate handling of temporal features, categorical variables, and the creation of a meaningful target variable.
 

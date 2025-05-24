@@ -31,7 +31,6 @@ def amalgamate_flight_data(
     raw_path = Path(raw_data_path)
     output_path = Path(output_file)
 
-    # Ensure output directory exists (dataset/processed)
     output_dir = output_path.parent
     if not output_dir.exists():
         print(f"Creating directory {output_dir}")
